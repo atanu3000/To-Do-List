@@ -1,21 +1,21 @@
 let addTask = document.querySelector('#addTask');
 let showTask = document.querySelector('#showTask');
+let showList = document.querySelector('.showList');
 let add = document.querySelector('#add');
 let success = document.querySelector('#success');
+let empty = document.querySelector('#empty');
 
 success.style.display = 'none';
+empty.style.display = 'none';
 
 // show task is by default display none
-// showTask.style.display = 'none';
+showTask.style.display = 'none';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
 // TODO: Add SDKs for Firebase products that you want to use
 import {
-    getDatabase,
-    ref,
-    push,
-    set,
+    getDatabase, ref, push, set, get,
   } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -40,9 +40,17 @@ addTask.addEventListener("submit", (e) => {
     e.preventDefault();
     let task = document.querySelector('#task').value;
     console.log(task);
-    sendMessage(task);
+    if (task.trim() === "") {
+      empty.style.display = 'block';
+      setTimeout(() => {
+        empty.style.display = 'none';
+      }, 4000);
+    }
+    else {
+      sendMessage(task);
+    }
 
-    addTask.reset();
+    
 });
 
 function sendMessage(task) {
@@ -52,7 +60,10 @@ function sendMessage(task) {
         task: task,
     })
     .then(() => {
+      showList.innerText = task;
       success.style.display = 'block';
+      addTask.reset();
+      showTask.style.display = 'block';
       setTimeout(() => {
         success.style.display = 'none';
       }, 4000);
@@ -61,3 +72,5 @@ function sendMessage(task) {
       alert("There is an error " + error);
     })
 }
+
+

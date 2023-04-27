@@ -13,15 +13,17 @@ body {
     justify-content: center;
     align-items: center;
     background: rgba(255, 255, 0, 0.477);
+    margin: 20px auto;
 }
 
 h1 {
-    font-family: 'Caveat', cursive;
+    font-family: 'Acme', cursive;
     text-transform: capitalize;
+    letter-spacing: 8px;
     font-size: 64px;
     margin-bottom: 30px;
     color: rgb(118, 37, 195);
-    text-shadow:  10px 10px 2px #fff;
+    text-shadow:  10px 10px 3px rgba(214, 173, 252, 0.721);
 }
 
 .wrapper {
@@ -36,9 +38,16 @@ h1 {
     margin: 20px auto;
 }
 
-.wrapper p {
+#success {
     background: rgb(151, 253, 151);
-    color: #1d6f1c;
+    color: green;
+    border: 2px solid green;
+}
+
+#empty {
+    background: #ffaaaac6;
+    color: red;
+    border: 2px solid red;
 }
 
 form {
@@ -57,7 +66,7 @@ input, button, .showList, .wrapper p {
     outline: none;
     font-family: 'Play', sans-serif;
     letter-spacing: 2px;
-    box-shadow: 5px 5px 10px #ccc;
+    box-shadow: 3px 3px 15px #ccc;
 }
 
 button {
