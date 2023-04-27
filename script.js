@@ -1,6 +1,9 @@
 let addTask = document.querySelector('#addTask');
 let showTask = document.querySelector('#showTask');
 let add = document.querySelector('#add');
+let success = document.querySelector('#success');
+
+success.style.display = 'none';
 
 // show task is by default display none
 // showTask.style.display = 'none';
@@ -47,21 +50,14 @@ function sendMessage(task) {
     const newTask = push(allTask);
     set(newTask, {
         task: task,
-    });
+    })
+    .then(() => {
+      success.style.display = 'block';
+      setTimeout(() => {
+        success.style.display = 'none';
+      }, 4000);
+    })
+    .catch((error) => {
+      alert("There is an error " + error);
+    })
 }
-
-const allTaskRef = ref(db, "allTask");
-on(allTaskRef, (snapshot) => {
-  // Get the value of the snapshot
-  const data = snapshot.val();
-
-  // Clear the current HTML in the "showTask" element
-  showTask.innerHTML = '';
-
-  // Loop through the data and add each task to the "showTask" element
-  for (const taskKey in data) {
-    const task = data[taskKey].task;
-    const taskHtml = `<li>${task}</li>`;
-    showTask.insertAdjacentHTML('beforeend', taskHtml);
-  }
-});
