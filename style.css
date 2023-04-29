@@ -23,7 +23,8 @@ h1 {
     font-size: 64px;
     margin-bottom: 30px;
     color: rgb(118, 37, 195);
-    text-shadow:  10px 10px 3px rgba(214, 173, 252, 0.721);
+    /* text-shadow:  10px 10px 3px rgba(214, 173, 252, 0.721); */
+    text-shadow:  10px 10px 3px rgba(216, 216, 0, 0.537);
 }
 
 .wrapper {

@@ -38,6 +38,9 @@ const db = getDatabase(app);
 
 addTask.addEventListener("submit", (e) => {
     e.preventDefault();
+    let allTime = new Date;
+    let time = `${allTime.getHours()} : ${allTime.getMinutes()} : ${allTime.getSeconds()}`;
+    let name = document.querySelector('#name').value;
     let task = document.querySelector('#task').value;
     console.log(task);
     if (task.trim() === "") {
@@ -47,17 +50,19 @@ addTask.addEventListener("submit", (e) => {
       }, 4000);
     }
     else {
-      sendMessage(task);
+      sendMessage(name, task, time);
     }
 
     
 });
 
-function sendMessage(task) {
+function sendMessage(name, task, time) {
     const allTask = ref(db, "allTask");
     const newTask = push(allTask);
     set(newTask, {
+        name: name,
         task: task,
+        time: time,
     })
     .then(() => {
       showList.innerText = task;
